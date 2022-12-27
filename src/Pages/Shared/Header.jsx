@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then((result) => {})
+      .catch((error) => console.log(error.message));
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -48,33 +57,51 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end ">
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" alt="" />
+        {user?.email ? (
+          <>
+            {" "}
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img src={user?.photoURL} alt="" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-300 w-44 rounded-md border"
+              >
+                <li>
+                  <Link to="/about" className="justify-between">
+                    Profile
+                  </Link>
+                </li>
+                {user ? (
+                  <li>
+                    <Link to="/login">
+                      <button onClick={handleSignOut} className="text-start mr- w-28 font-semibold">
+                        Sign Out
+                      </button>
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/login">
+                      <button className="text-start mr- w-28 font-semibold">Sign In</button>
+                    </Link>
+                  </li>
+                )}
+              </ul>
             </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <Link to="/about" className="justify-between">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link>
-                <button className="text-start mr- w-28 font-semibold">Sign In</button>
-              </Link>
-            </li>
-            <li>
-              <Link>
-                <button className="text-start mr- w-28 font-semibold">Sign Out</button>
-              </Link>
-            </li>
-          </ul>
-        </div>
+          </>
+        ) : (
+          <li>
+            <Link to="/login">
+              <button className="w-28  mr-2 py-1 font-semibold border border-blue-400">
+                Sign in
+              </button>
+            </Link>
+          </li>
+        )}
       </div>
     </div>
   );

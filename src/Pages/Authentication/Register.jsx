@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Register = () => {
   const { createUser, update } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,6 +19,7 @@ const Register = () => {
     createUser(data.email, data.password)
       .then((result) => {
         update(data.name);
+        navigate("/login");
         setError("");
         console.log(result.user);
       })

@@ -2,13 +2,16 @@ import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Login = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ const Login = () => {
   const handleSignIn = (data) => {
     signInUser(data.email, data.password)
       .then((result) => {
+        navigate(from, { replace: true });
         setError("");
         console.log(result.user);
       })
@@ -28,6 +32,7 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     googleSignIn(googleProvider)
       .then((result) => {
+        navigate(from, { replace: true });
         console.log(result.user);
       })
       .catch((error) => {
@@ -76,8 +81,11 @@ const Login = () => {
         />
         <div className="w-[27%] mx-auto cursor-pointer ">
           <div className="divider  text-xs">OR</div>
-          <div className="md:flex lg:flex md:items-center lg:items-center md:border lg:border rounded-full p-1 hover:bg-sky-800">
-            <FaGoogle onClick={handleGoogleSignIn} className="text-3xl mx-auto md:mx-0 lg:mx-0" />
+          <div
+            onClick={handleGoogleSignIn}
+            className="md:flex lg:flex md:items-center lg:items-center md:border lg:border rounded-full p-1 hover:bg-sky-800"
+          >
+            <FaGoogle className="text-3xl mx-auto md:mx-0 lg:mx-0" />
             <input
               type="button"
               value="Continue with google"
