@@ -18,7 +18,6 @@ const Register = () => {
     createUser(data.email, data.password)
       .then((result) => {
         update(data.name);
-        toast.success("User created successfully");
         setError("");
         console.log(result.user);
       })
@@ -30,7 +29,35 @@ const Register = () => {
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?key=08dce7fbfc7b46f77e82a01c97db482a`;
+    const url = `https://api.imgbb.com/1/upload?key=f6f4f20b858476e04e59da4c1ede396a`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        if (imageData.success) {
+          const userInfo = {
+            userName: data.name,
+            img: imageData.data.url,
+            email: data.email,
+          };
+          fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                toast.success("User created successfully");
+              }
+            });
+        }
+      });
   };
   return (
     <div className="text-center my-24">
