@@ -77,7 +77,7 @@ const Login = () => {
         <input
           type="submit"
           value="Sign in"
-          className="border w-80  px-2 py-2 mt-5 rounded-md font-medium bg-gray-300 hover:bg-white text-black"
+          className="border w-80  px-2 py-2 mt-5 rounded-md font-medium bg-gray-300 hover:bg-white text-black cursor-pointer"
         />
         <div className="w-[27%] mx-auto cursor-pointer ">
           <div className="divider  text-xs">OR</div>

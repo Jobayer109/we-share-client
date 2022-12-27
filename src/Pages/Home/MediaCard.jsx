@@ -1,27 +1,63 @@
 import React from "react";
+import { FaCommentAlt, FaShareAlt, FaThumbsUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MediaCard = ({ pst }) => {
   console.log(pst);
-  const { date, poster, posterImg, postedImg, post } = pst;
+  const { poster, posterImg, postedImg, post, _id } = pst;
   return (
-    <div className=" mt-10 text-base-300">
-      <div className="container grid grid-cols-12 mx-auto border border-gray-400">
-        <div className="col-span-full lg:col-span-4">
-          <img src={postedImg} alt="" />
-        </div>
-        <div className="flex flex-col p-6 col-span-full row-span-full lg:col-span-8 lg:p-10">
-          <p className="flex-1 pt-2">{post}</p>
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex space-x-2">
-              <div className="avatar">
-                <div className="w-8 rounded">
-                  <img src={posterImg} alt="Tailwind-CSS-Avatar-component" />
-                </div>
-              </div>
-              <span className="self-center text-sm">{poster}</span>
-            </div>
-            <span className="text-xs">Date: {date.split(".")[0]}</span>
+    <div className="rounded-md shadow-md sm:w-96 bg-base-300 dark:text-gray-100">
+      <div className="flex items-center justify-between p-3">
+        <div className="flex items-center space-x-2">
+          <img
+            src={posterImg}
+            alt=""
+            className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700"
+          />
+          <div className="-space-y-1">
+            <h2 className="text-sm font-semibold leading-none">{poster}</h2>
+            <span className="inline-block text-xs leading-none dark:text-gray-400">Dhaka</span>
           </div>
+        </div>
+      </div>
+      <img
+        src={postedImg}
+        alt=""
+        className="object-cover object-center w-full h-72 dark:bg-gray-500"
+      />
+      <div className="p-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <button type="button" title="Like post" className="flex items-center justify-center">
+              <FaThumbsUp />
+            </button>
+            <button
+              type="button"
+              title="Add a comment"
+              className="flex items-center justify-center"
+            >
+              <FaCommentAlt />
+            </button>
+            <button type="button" title="Share post" className="flex items-center justify-center">
+              <FaShareAlt />
+            </button>
+          </div>
+        </div>
+        <div className="space-y-3">
+          <p className="text-sm mt-4">
+            {post.length > 200 ? (
+              <>
+                {post.slice(0, 100) + "..."} <Link to={`/post/${_id}`}>Read more</Link>
+              </>
+            ) : (
+              post
+            )}
+          </p>
+          <input
+            type="text"
+            placeholder="Add a comment..."
+            className="w-full py-0.5 dark:bg-transparent border-none rounded text-sm pl-0 dark:text-gray-100"
+          />
         </div>
       </div>
     </div>
