@@ -24,7 +24,7 @@ const Register = () => {
         console.log(result.user);
       })
       .catch((error) => {
-        setError(error.code, error.message);
+        setError(error.message);
         return;
       });
 
@@ -57,6 +57,7 @@ const Register = () => {
               if (data.acknowledged) {
                 toast.success("User created successfully");
               }
+              console.log(data);
             });
         }
       });

@@ -1,9 +1,10 @@
 import React from "react";
+import CreatePost from "./CreatePost";
 
 const Home = () => {
   return (
-    <div>
-      <> Home page</>
+    <div className="bg-white">
+      <CreatePost />
     </div>
   );
 };
