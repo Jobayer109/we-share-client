@@ -51,7 +51,11 @@ const CreatePost = () => {
         <div className="flex justify-between p-4">
           <div className="flex space-x-4">
             <div>
-              <img src={user?.photoURL} alt="" className="object-cover w-12 h-12 rounded-full " />
+              {user?.email ? (
+                <img src={user?.photoURL} alt="" className="object-cover w-12 h-12 rounded-full " />
+              ) : (
+                ""
+              )}
             </div>
             <div>
               <h4 className="font-semibold text-black">{user?.displayName}</h4>

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { FadeLoader } from "react-spinners";
 import MediaCard from "./MediaCard";
 
 const Media = () => {
@@ -13,7 +14,18 @@ const Media = () => {
   console.log(posts);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <FadeLoader
+        color="#36d7b7"
+        style={{
+          position: "fixed",
+          top: "35%",
+          left: "48%",
+          paddingTop: "100px",
+          paddingBottom: "200px",
+        }}
+      />
+    );
   }
 
   return (
