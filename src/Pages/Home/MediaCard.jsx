@@ -1,12 +1,11 @@
 import React from "react";
-import { FaCommentAlt, FaShareAlt, FaThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const MediaCard = ({ pst }) => {
   console.log(pst);
   const { poster, posterImg, postedImg, post, _id } = pst;
   return (
-    <div className="rounded-md shadow-md sm:w-96 bg-base-300 dark:text-gray-100">
+    <div className="rounded-md shadow-md mt-6 bg-base-300 dark:text-gray-100">
       <div className="flex items-center justify-between p-3">
         <div className="flex items-center space-x-2">
           <img
@@ -26,38 +25,15 @@ const MediaCard = ({ pst }) => {
         className="object-cover object-center w-full h-72 dark:bg-gray-500"
       />
       <div className="p-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <button type="button" title="Like post" className="flex items-center justify-center">
-              <FaThumbsUp />
-            </button>
-            <button
-              type="button"
-              title="Add a comment"
-              className="flex items-center justify-center"
-            >
-              <FaCommentAlt />
-            </button>
-            <button type="button" title="Share post" className="flex items-center justify-center">
-              <FaShareAlt />
-            </button>
-          </div>
-        </div>
         <div className="space-y-3">
           <p className="text-sm mt-4">
-            {post.length > 200 ? (
-              <>
-                {post.slice(0, 100) + "..."} <Link to={`/post/${_id}`}>Read more</Link>
-              </>
-            ) : (
-              post
-            )}
+            {post.length > 200 ? <>{post.slice(0, 100) + "..."}</> : post}
           </p>
-          <input
-            type="text"
-            placeholder="Add a comment..."
-            className="w-full py-0.5 dark:bg-transparent border-none rounded text-sm pl-0 dark:text-gray-100"
-          />
+          <div className="text-end">
+            <Link to={`/post/${_id}`}>
+              <button className="btn btn-xs bg-base-200">See details</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

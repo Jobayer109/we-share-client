@@ -28,7 +28,7 @@ const CreatePost = () => {
             post: data.textarea,
             postedImg: imageData.data.url,
           };
-          fetch(`http://localhost:5000/posts`, {
+          fetch(`https://we-share-server.vercel.app/posts`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

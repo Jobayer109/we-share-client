@@ -89,7 +89,7 @@ const Login = () => {
             <input
               type="button"
               value="Continue with google"
-              className="md:ml-10 lg:ml-16  font-medium text-sm hidden md:block lg:block"
+              className="md:ml-10 lg:ml-16 cursor-pointer  font-medium text-sm hidden md:block lg:block"
             />
           </div>
           <p className="text-xs mt-2">

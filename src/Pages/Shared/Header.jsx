@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { FaAlignJustify, FaEnvelope, FaHome, FaList, FaListAlt, FaUserAlt } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -44,16 +45,24 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <FaHome className="text-xl mx-6" />
+            </Link>
           </li>
           <li>
-            <Link to="/media">Media</Link>
+            <Link to="/media">
+              <FaListAlt className="text-xl mx-6" />
+            </Link>
           </li>
           <li>
-            <Link to="/message">Messages</Link>
+            <Link to="/message">
+              <FaEnvelope className="text-xl mx-6" />
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about">
+              <FaUserAlt className="text-xl mx-6" />
+            </Link>
           </li>
         </ul>
       </div>

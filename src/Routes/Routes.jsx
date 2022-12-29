@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "post/:id",
         element: <MediaCardDetails />,
-        loader: ({ params }) => fetch(`http://localhost:5000/post/${params.id}`),
+        loader: ({ params }) => fetch(`https://we-share-server.vercel.app/post/${params.id}`),
       },
       {
         path: "message",
