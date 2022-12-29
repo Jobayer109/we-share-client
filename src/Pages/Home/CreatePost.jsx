@@ -19,6 +19,7 @@ const CreatePost = () => {
     })
       .then((res) => res.json())
       .then((imageData) => {
+        console.log(imageData);
         if (imageData.success) {
           const postInfo = {
             poster: user?.displayName,
@@ -77,7 +78,7 @@ const CreatePost = () => {
               <input
                 type="file"
                 name="image"
-                {...register("image", { required: true })}
+                {...register("image")}
                 className="none text-center rounded-full p-3 text-sm mt-2  cursor-pointer"
               />{" "}
               <br />
